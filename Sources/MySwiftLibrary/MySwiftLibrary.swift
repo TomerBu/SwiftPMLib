@@ -10,16 +10,24 @@ import Foundation
 import UIKit
 
 public class MClass {
-    
-    public var root: UIViewController?
-    
+ 
     public init(){
-        guard let scene = UIApplication.shared.connectedScenes.first,
-        let delegate = scene.delegate as? SceneDelegate,
-        let window = delegate.window  else {return}
-        
-        if let root = window.rootViewController{
-            self.root = root
+        if #available(iOS 13, *) {
+ 
+        } else {
+            
         }
+    }
+    
+    public var sceneDelegate:UISceneDelegate?{
+         guard let scene = UIApplication.shared.connectedScenes.first,
+                       let delegate = scene.delegate else {return nil}
+        
+        return delegate
+    }
+    
+    //non public - available to project including unit tests
+    var text:String {
+        "Hello, World!"
     }
 }
